@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import TextField from "@material-ui/core/TextField";
 
 // const store = inject("store");
 
@@ -8,24 +7,18 @@ import TextField from "@material-ui/core/TextField";
 // observer(({ store }) => {
 @inject("store")
 @observer
-class TextInput extends Component {
-  handleInputChanged = event => {
-    const { store } = this.props;
-    store.setText(event.target.value);
-  };
-
+class TextOutput extends Component {
   render() {
     const { store } = this.props;
     console.log(store);
     // const { store } = this.props;
     return (
       <div>
-        <h1>Input</h1>
-        <TextField value={store.inputText} onChange={this.handleInputChanged} />
+        <h1>Output</h1>
+        <span>{store.outputText}</span>
       </div>
     );
   }
 }
-// })
-// );
-export default TextInput;
+
+export default TextOutput;

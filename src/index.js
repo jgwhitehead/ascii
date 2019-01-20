@@ -9,9 +9,15 @@ import Store from "./Store";
 const store = new Store();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <div>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+    />
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </div>,
   document.getElementById("root")
 );
 
