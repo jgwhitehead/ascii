@@ -20,8 +20,12 @@ class TextInput extends Component {
     // const { store } = this.props;
     return (
       <div>
-        <h1>Input</h1>
-        <TextField value={store.inputText} onChange={this.handleInputChanged} />
+        <TextField
+          label="Input"
+          variant="outlined"
+          value={store.inputText}
+          onChange={this.handleInputChanged}
+        />
       </div>
     );
   }
