@@ -14,6 +14,10 @@ ReactDOM.render(
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
     />
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"
+    />
     <Provider store={store}>
       <App />
     </Provider>
