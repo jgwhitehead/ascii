@@ -11,11 +11,11 @@ class TextOutput extends Component {
   render() {
     const { store } = this.props;
     console.log(store);
-    // const { store } = this.props;
+
     return (
       <div>
         <h1>Output</h1>
-        <span>{store.outputText}</span>
+        <pre>{store.outputText}</pre>
       </div>
     );
   }
