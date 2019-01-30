@@ -165,15 +165,15 @@ import * as weird from "./fonts/weird.flf";
 
 export class Figlet {
   fonts = {};
-  //   fonts = { speed: speed };
+  fonts = { speed: speed };
 
   parseFont(name, fn) {
-    if (name in this.fonts) {
+    if (name in Object.keys(this.fonts)) {
       fn();
       return;
     }
 
-    var lines = fonts[name].split("\n"),
+    var lines = this.fonts[name].split("\n"),
       header = lines[0].split(" "),
       hardblank = header[0].charAt(header[0].length - 1),
       height = +header[1],
