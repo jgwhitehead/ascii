@@ -18,7 +18,7 @@ class Store {
   setText(inputText) {
     this.inputText = inputText;
     var figlet = new Figlet();
-    figlet.write(inputText, "speed", str => {
+    figlet.write(inputText, "wavy", str => {
       this.setOutputText(str);
     });
   }
