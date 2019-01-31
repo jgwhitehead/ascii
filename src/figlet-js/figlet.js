@@ -315,24 +315,22 @@ export class Figlet {
   };
 
   parseFont(name, fn) {
-    if (name in Object.keys(this.fonts)) {
-      fn();
-      return;
-    }
-
-    var lines = this.fonts[name].split("\n"),
-      header = lines[0].split(" "),
-      hardblank = header[0].charAt(header[0].length - 1),
-      height = +header[1],
-      comments = +header[5];
-
-    this.fonts[name] = {
-      defn: lines.slice(comments + 1),
-      hardblank: hardblank,
-      height: height,
-      char: {}
-    };
-    fn();
+    // if (name in Object.keys(this.fonts)) {
+    //   fn();
+    //   return;
+    // }
+    // var lines = this.fonts[name].split("\n"),
+    //   header = lines[0].split(" "),
+    //   hardblank = header[0].charAt(header[0].length - 1),
+    //   height = +header[1],
+    //   comments = +header[5];
+    // this.fonts[name] = {
+    //   defn: lines.slice(comments + 1),
+    //   hardblank: hardblank,
+    //   height: height,
+    //   char: {}
+    // };
+    // fn();
   }
 
   _parseFont(name, defn, fn) {
@@ -369,24 +367,58 @@ export class Figlet {
     return (fontDefn.char[char] = charDefn);
   }
 
-  write(str, font, fn) {
+  write(str, font) {
     if (str.length == 0) {
       return " ";
     }
-    this.parseFont(font, () => {
-      var chars = [],
-        result = "";
-      for (var i = 0, len = str.length; i < len; i++) {
-        chars[i] = this.parseChar(str.charCodeAt(i), font);
+    if (font in Object.keys(this.fonts)) {
+      return this.writeFont(str, font);
+    }
+
+    var lines = this.fonts[font].split("\n"),
+      header = lines[0].split(" "),
+      hardblank = header[0].charAt(header[0].length - 1),
+      height = +header[1],
+      comments = +header[5];
+
+    this.fonts[font] = {
+      defn: lines.slice(comments + 1),
+      hardblank: hardblank,
+      height: height,
+      char: {}
+    };
+    return this.writeFont(str, font);
+
+    // this.parseFont(font, () => {
+    //   var chars = [],
+    //     result = "";
+    //   for (var i = 0, len = str.length; i < len; i++) {
+    //     chars[i] = this.parseChar(str.charCodeAt(i), font);
+    //   }
+    //   var height;
+    //   for (i = 0, height = chars[0].length; i < height; i++) {
+    //     for (var j = 0; j < len; j++) {
+    //       result += chars[j][i];
+    //     }
+    //     result += "\n";
+    //   }
+    //   fn(result);
+    // });
+  }
+
+  writeFont(str, font) {
+    var chars = [],
+      result = "";
+    for (var i = 0, len = str.length; i < len; i++) {
+      chars[i] = this.parseChar(str.charCodeAt(i), font);
+    }
+    var height;
+    for (i = 0, height = chars[0].length; i < height; i++) {
+      for (var j = 0; j < len; j++) {
+        result += chars[j][i];
       }
-      var height;
-      for (i = 0, height = chars[0].length; i < height; i++) {
-        for (var j = 0; j < len; j++) {
-          result += chars[j][i];
-        }
-        result += "\n";
-      }
-      fn(result);
-    });
+      result += "\n";
+    }
+    return result;
   }
 }
