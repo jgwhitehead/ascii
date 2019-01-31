@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { observable, computed, action } from "mobx";
 import { inject, observer } from "mobx-react";
 import { Figlet } from "./figlet-js/figlet";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 // const store = inject("store");
 
@@ -18,13 +20,19 @@ class TextOutput extends Component {
 
   render() {
     const { store } = this.props;
-    console.log(store);
+
+    let cardStyle = {
+      "margin-top": "30px",
+      "box-shadow": "5px 5px 5px  #808080a1"
+    };
 
     return (
-      <div>
-        <h1>{this.props.font}</h1>
-        <pre>{this.output}</pre>
-      </div>
+      <Card style={cardStyle}>
+        <CardContent>
+          <h1>{this.props.font}</h1>
+          <pre>{this.output}</pre>
+        </CardContent>
+      </Card>
     );
   }
 }

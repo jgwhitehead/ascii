@@ -19,11 +19,11 @@ class App extends Component {
 
     return (
       <div className="App" style={styles}>
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
+        <Grid container justify="center" spacing={24}>
+          <Grid item xs={10}>
             <TextInput />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={10}>
             {outputList}
             {/* <TextOutput font="speed" />
             <TextOutput font="wavy" /> */}
