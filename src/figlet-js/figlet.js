@@ -314,39 +314,60 @@ export class Figlet {
     weird: weird
   };
 
-  parseFont(name, fn) {
-    // if (name in Object.keys(this.fonts)) {
-    //   fn();
-    //   return;
-    // }
-    // var lines = this.fonts[name].split("\n"),
-    //   header = lines[0].split(" "),
-    //   hardblank = header[0].charAt(header[0].length - 1),
-    //   height = +header[1],
-    //   comments = +header[5];
-    // this.fonts[name] = {
-    //   defn: lines.slice(comments + 1),
-    //   hardblank: hardblank,
-    //   height: height,
-    //   char: {}
-    // };
-    // fn();
+  write(str, font) {
+    if (str.length == 0) {
+      return " ";
+    }
+
+    if (!(font in Object.keys(this.fonts))) {
+      this.loadFont(font);
+    }
+
+    return this.writeFont(str, font, true);
   }
 
-  _parseFont(name, defn, fn) {
-    var lines = defn.split("\n"),
+  loadFont(font) {
+    var lines = this.fonts[font].split("\n"),
       header = lines[0].split(" "),
       hardblank = header[0].charAt(header[0].length - 1),
       height = +header[1],
       comments = +header[5];
 
-    this.fonts[name] = {
+    this.fonts[font] = {
       defn: lines.slice(comments + 1),
       hardblank: hardblank,
       height: height,
       char: {}
     };
-    fn();
+  }
+
+  writeFont(str, font, horizontal) {
+    var chars = [],
+      result = "";
+    for (var i = 0, len = str.length; i < len; i++) {
+      chars[i] = this.parseChar(str.charCodeAt(i), font);
+    }
+
+    if (horizontal) {
+      //for every character in src srting
+      for (i = 0; i < chars[0].length; i++) {
+        //for the width of a single ascii character
+        for (var j = 0; j < len; j++) {
+          //print the characters of first line (width) of each src character in ascii, then 2 etc then onto the next line
+          result += chars[j][i];
+        }
+        result += "\n";
+      }
+    } else {
+      for (var j = 0; j < len; j++) {
+        for (i = 0; i < chars[0].length; i++) {
+          result += chars[j][i];
+          result += "\n";
+        }
+        // result += "\n";
+      }
+    }
+    return result;
   }
 
   parseChar(char, font) {
@@ -365,60 +386,5 @@ export class Figlet {
         .replace(RegExp("\\" + fontDefn.hardblank, "g"), " ");
     }
     return (fontDefn.char[char] = charDefn);
-  }
-
-  write(str, font) {
-    if (str.length == 0) {
-      return " ";
-    }
-    if (font in Object.keys(this.fonts)) {
-      return this.writeFont(str, font);
-    }
-
-    var lines = this.fonts[font].split("\n"),
-      header = lines[0].split(" "),
-      hardblank = header[0].charAt(header[0].length - 1),
-      height = +header[1],
-      comments = +header[5];
-
-    this.fonts[font] = {
-      defn: lines.slice(comments + 1),
-      hardblank: hardblank,
-      height: height,
-      char: {}
-    };
-    return this.writeFont(str, font);
-
-    // this.parseFont(font, () => {
-    //   var chars = [],
-    //     result = "";
-    //   for (var i = 0, len = str.length; i < len; i++) {
-    //     chars[i] = this.parseChar(str.charCodeAt(i), font);
-    //   }
-    //   var height;
-    //   for (i = 0, height = chars[0].length; i < height; i++) {
-    //     for (var j = 0; j < len; j++) {
-    //       result += chars[j][i];
-    //     }
-    //     result += "\n";
-    //   }
-    //   fn(result);
-    // });
-  }
-
-  writeFont(str, font) {
-    var chars = [],
-      result = "";
-    for (var i = 0, len = str.length; i < len; i++) {
-      chars[i] = this.parseChar(str.charCodeAt(i), font);
-    }
-    var height;
-    for (i = 0, height = chars[0].length; i < height; i++) {
-      for (var j = 0; j < len; j++) {
-        result += chars[j][i];
-      }
-      result += "\n";
-    }
-    return result;
   }
 }

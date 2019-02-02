@@ -56,14 +56,12 @@ class TextOutput extends Component {
           <Typography gutterBottom variant="h5" component="h2">
             {this.props.font.charAt(0).toUpperCase() + this.props.font.slice(1)}
           </Typography>
-          {/* <h1>{this.props.font}</h1> */}
           <pre ref={pre => (this.pre = pre)}>{this.output}</pre>
           <div>
             <Fab
               size="small"
               color="primary"
               aria-label="Copy"
-              // className={classes.fab}
               onClick={this.copyToClipboard}
             >
               <Icon>file_copy</Icon>
