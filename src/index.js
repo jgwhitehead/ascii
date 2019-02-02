@@ -18,6 +18,10 @@ ReactDOM.render(
       type="text/javascript"
       src="//cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"
     />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <Provider store={store}>
       <App />
     </Provider>

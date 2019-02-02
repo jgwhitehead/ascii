@@ -5,6 +5,8 @@ import { Figlet } from "./figlet-js/figlet";
 import { Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import Fab from "@material-ui/core/Fab";
+import Icon from "@material-ui/core/Icon";
 
 // const store = inject("store");
 
@@ -48,18 +50,6 @@ class TextOutput extends Component {
       "margin-top": "30px"
     };
 
-    // const textAreaRef = useRef(null);
-
-    // function copyToClipboard(e) {
-    //   // this.textAreaRef.current.select();
-    //   // document.execCommand("copy");
-    //   // e.target.focus();
-    //   // // e.target.focus();
-
-    //   textarea.select();
-    //   document.execCommand("copy");
-    // }
-
     return (
       <Card style={cardStyle} raised="True">
         <CardContent>
@@ -69,7 +59,15 @@ class TextOutput extends Component {
           {/* <h1>{this.props.font}</h1> */}
           <pre ref={pre => (this.pre = pre)}>{this.output}</pre>
           <div>
-            <button onClick={this.copyToClipboard}>Copy</button>
+            <Fab
+              size="small"
+              color="primary"
+              aria-label="Copy"
+              // className={classes.fab}
+              onClick={this.copyToClipboard}
+            >
+              <Icon>file_copy</Icon>
+            </Fab>
           </div>
         </CardContent>
       </Card>
