@@ -17,12 +17,9 @@ class TextInput extends Component {
 
   render() {
     const { store } = this.props;
-    console.log(store);
-    // const { store } = this.props;
 
-    const cardStyle = { "box-shadow": "5px 5px 5px #808080a1" };
     return (
-      <Card style={cardStyle}>
+      <Card raised="True">
         <CardContent>
           <TextField
             label="Input"
