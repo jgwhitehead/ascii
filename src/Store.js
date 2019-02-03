@@ -8,6 +8,8 @@ class Store {
   @observable inputText = "write something";
   @observable outputText;
 
+  @observable horizontal = true;
+
   @action
   setOutputText(outputText) {
     this.outputText = outputText;
@@ -21,6 +23,11 @@ class Store {
     figlet.write(inputText, "wavy", str => {
       this.setOutputText(str);
     });
+  }
+
+  @action
+  toggleHorizontal() {
+    this.horizontal = !this.horizontal;
   }
 }
 

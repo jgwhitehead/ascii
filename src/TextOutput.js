@@ -18,22 +18,14 @@ class TextOutput extends Component {
   @computed
   get output() {
     var figlet = new Figlet();
-    return figlet.write(this.props.store.inputText, this.props.font);
+    return figlet.write(
+      this.props.store.inputText,
+      this.props.font,
+      this.props.store.horizontal
+    );
   }
 
-  // textAreaRef = useRef(null);
-
-  // copyToClipboard(e) {
-  //   this.textAreaRef.current.select();
-  //   document.execCommand("copy");
-  //   // e.target.focus();
-  // }
   copyToClipboard = e => {
-    // this.pre.select();
-    // document.execCommand("copy");
-    // This is just personal preference.
-    // I prefer to not show the the whole text area selected.
-
     const copyText = this.pre.textContent;
 
     const textArea = document.createElement("textarea");

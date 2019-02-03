@@ -314,7 +314,7 @@ export class Figlet {
     weird: weird
   };
 
-  write(str, font) {
+  write(str, font, horizontal) {
     if (str.length == 0) {
       return " ";
     }
@@ -323,7 +323,7 @@ export class Figlet {
       this.loadFont(font);
     }
 
-    return this.writeFont(str, font, true);
+    return this.writeFont(str, font, horizontal);
   }
 
   loadFont(font) {

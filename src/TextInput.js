@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
+import { FormControlLabel } from "@material-ui/core";
+import { Switch } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import { CardContent } from "@material-ui/core";
-// const store = inject("store");
+import Fab from "@material-ui/core/Fab";
+import Icon from "@material-ui/core/Icon";
 
-// const TextInput = inject("store");
-// observer(({ store }) => {
 @inject("store")
 @observer
 class TextInput extends Component {
   handleInputChanged = event => {
-    const { store } = this.props;
-    store.setText(event.target.value);
+    this.props.store.setText(event.target.value);
   };
 
+  toggle = () => {
+    this.props.store.toggleHorizontal();
+  };
   render() {
     const { store } = this.props;
 
@@ -26,6 +29,13 @@ class TextInput extends Component {
             variant="outlined"
             value={store.inputText}
             onChange={this.handleInputChanged}
+          />
+          <FormControlLabel
+            label="Horizontal"
+            labelPlacement="start"
+            control={
+              <Switch checked={store.horizontal} onChange={this.toggle} />
+            }
           />
         </CardContent>
       </Card>
